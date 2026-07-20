@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maaf, Mutia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#1e1526;
+    --bg-mid:#2c1e38;
+    --bg-soft:#3a2846;
+    --blush:#e8b7bd;
+    --gold:#d8b06c;
+    --mist:#b7a3c9;
+    --cream:#f7eee3;
+    --text-soft:#ddd0e6;
+    --line: rgba(216,176,108,0.35);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 45%, var(--bg-soft) 100%);
+    color: var(--text-soft);
+    font-family:'Manrope', sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .display{
+    font-family:'Fraunces', serif;
+  }
+
+  /* ---------- Starfield ---------- */
+  #stars{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+  }
+  .star{
+    position:absolute;
+    border-radius:50%;
+    background: var(--cream);
+    opacity:0.5;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%, 100%{ opacity:0.15; transform:scale(0.8); }
+    50%{ opacity:0.9; transform:scale(1.15); }
+  }
+
+  section{
+    position:relative;
+    z-index:1;
+    padding: 8rem 1.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding-top:6rem;
+    padding-bottom:6rem;
+  }
+  .hero .eyebrow{
+    font-family:'Manrope', sans-serif;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    font-size:0.7rem;
+    color:var(--gold);
+    opacity:0;
+    animation: fadeUp 1.2s ease forwards 0.2s;
+  }
+  .hero h1{
+    font-size: clamp(3rem, 11vw, 5.5rem);
+    font-weight:400;
+    font-style:italic;
+    color:var(--cream);
+    line-height:1.05;
+    margin-top:1.2rem;
+    opacity:0;
+    animation: fadeUp 1.2s ease forwards 0.5s;
+  }
+  .hero p{
+    max-width:30em;
+    margin-top:1.8rem;
+    font-size:1.05rem;
+    line-height:1.8;
+    color:var(--text-soft);
+    opacity:0;
+    animation: fadeUp 1.2s ease forwards 0.9s;
+  }
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .scroll-cue{
+    margin-top:4rem;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--mist);
+    opacity:0;
+    animation: fadeUp 1.2s ease forwards 1.3s, bob 2.4s ease-in-out infinite 2.5s;
+  }
+  @keyframes bob{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(6px); }
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------- Letter ---------- */
+  .kicker{
+    font-size:0.7rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:1.2rem;
+    display:block;
+  }
+  .letter h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(1.9rem, 5vw, 2.6rem);
+    color:var(--cream);
+    margin-bottom:2rem;
+    line-height:1.2;
+  }
+  .letter p{
+    font-size:1.05rem;
+    line-height:2;
+    color:var(--text-soft);
+    margin-bottom:1.4rem;
+  }
+  .letter p:first-of-type::first-letter{
+    font-family:'Fraunces', serif;
+    font-size:3.4rem;
+    font-style:italic;
+    color:var(--gold);
+    float:left;
+    line-height:0.8;
+    margin:0.1em 0.15em 0 0;
+  }
+  .letter .signoff{
+    margin-top:2.5rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--blush);
+    font-size:1.15rem;
+  }
+
+  /* ---------- Constellation signature ---------- */
+  .const-wrap{
+    text-align:center;
+  }
+  .const-wrap h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(1.9rem, 5vw, 2.6rem);
+    color:var(--cream);
+  }
+  .const-wrap .sub{
+    color:var(--mist);
+    margin-top:0.8rem;
+    font-size:0.95rem;
+    margin-bottom:3rem;
+  }
+
+  .constellation{
+    position:relative;
+    width:100%;
+    max-width:560px;
+    height:420px;
+    margin:0 auto;
+  }
+  .constellation svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+  }
+  .constellation svg line{
+    stroke: var(--line);
+    stroke-width:1;
+    stroke-dasharray: 4 5;
+  }
+
+  .cstar{
+    position:absolute;
+    width:16px;
+    height:16px;
+    transform:translate(-50%,-50%);
+    cursor:pointer;
+    background:none;
+    border:none;
+    padding:0;
+  }
+  .cstar::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background: var(--gold);
+    box-shadow: 0 0 0px 0px rgba(216,176,108,0.6);
+    transition: box-shadow 0.4s ease, background 0.4s ease, transform 0.4s ease;
+  }
+  .cstar:hover::before, .cstar.active::before{
+    background: var(--blush);
+    box-shadow: 0 0 22px 6px rgba(232,183,189,0.55);
+    transform:scale(1.3);
+  }
+
+  .cstar .note{
+    position:absolute;
+    bottom:130%;
+    left:50%;
+    transform:translateX(-50%) translateY(6px);
+    width:220px;
+    background: rgba(30,21,38,0.96);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:0.9rem 1rem;
+    font-size:0.85rem;
+    line-height:1.6;
+    color:var(--cream);
+    opacity:0;
+    pointer-events:none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index:5;
+  }
+  .cstar.active .note{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+    pointer-events:auto;
+  }
+
+  /* ---------- Closing ---------- */
+  .closing{
+    text-align:center;
+    padding-bottom:10rem;
+  }
+  .closing .moon{
+    width:64px;
+    height:64px;
+    margin:0 auto 2rem auto;
+    border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, var(--cream), var(--gold) 70%);
+    box-shadow: 0 0 40px 10px rgba(216,176,108,0.25);
+  }
+  .closing h2{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(2rem, 6vw, 3rem);
+    color:var(--cream);
+    line-height:1.2;
+  }
+  .closing p{
+    margin-top:1.5rem;
+    max-width:32em;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:1.9;
+    color:var(--text-soft);
+  }
+  .closing .final{
+    margin-top:3rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--blush);
+    font-size:1.2rem;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+    }
+  }
+
+  @media (max-width:480px){
+    section{ padding:5.5rem 1.2rem; }
+    .constellation{ height:380px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<section class="hero">
+  <span class="eyebrow">untuk Mutia Audini</span>
+  <h1 class="display">Maaf,<br>Mutia.</h1>
+  <p>Aku tau aku belum bisa kasih semua yang orang lain bisa kasih. Tapi izinkan aku, pelan-pelan, cerita apa yang sebenarnya bisa aku kasih.</p>
+  <span class="scroll-cue">gulir ke bawah ↓</span>
+</section>
+
+<section class="letter reveal">
+  <span class="kicker">Yang Ingin Aku Bilang</span>
+  <h2 class="display">Aku nggak akan janji jadi yang paling hebat.</h2>
+  <p>Aku sadar, ada saat-saat kamu ngebandingin, atau mungkin cuma mikir dalam hati, kenapa aku belum bisa seperti cowok lain. Dan aku nggak akan bilang itu nggak wajar, karena aku juga sering ngerasa gitu ke diri aku sendiri.</p>
+  <p>Tapi aku juga pengen kamu tau, aku bukan lagi berusaha jadi "cowok lain" itu. Aku cuma pengen jadi versi terbaik dari diri aku, yang pantas buat berdiri di samping kamu. Itu butuh waktu, dan aku minta maaf kalau selama ini prosesnya bikin kamu ikut capek nunggu.</p>
+  <p>Aku nggak selalu bisa kasih yang paling banyak, paling mewah, atau paling cepat. Tapi aku bisa kasih usaha yang konsisten, hati yang jujur, dan niat yang nggak pernah berubah: mau terus belajar, buat kamu.</p>
+  <p class="signoff">Maaf ya, Mutia. Aku lagi belajar, dan aku nggak mau berhenti.</p>
+</section>
+
+<section class="const-wrap reveal">
+  <h2 class="display">Ini yang Aku Punya untuk Kamu</h2>
+  <p class="sub">bukan barang, bukan gengsi — sentuh satu-satu bintangnya.</p>
+  <div class="constellation" id="constellation">
+    <svg id="constLines"></svg>
+    <!-- stars injected by JS -->
+  </div>
+</section>
+
+<section class="closing reveal">
+  <div class="moon"></div>
+  <h2 class="display">Aku minta maaf, Mutia.</h2>
+  <p>Bukan cuma lewat halaman ini, tapi lewat usaha aku yang akan kamu lihat pelan-pelan, hari demi hari. Aku nggak sempurna, dan aku belum jadi segalanya yang kamu mau. Tapi aku di sini, milih kamu, dan mau terus coba.</p>
+  <p class="final">dari aku, yang masih belajar mencintaimu dengan lebih baik.</p>
+</section>
+
+<script>
+  // starfield
+  const starsContainer = document.getElementById('stars');
+  const starCount = window.innerWidth < 600 ? 60 : 110;
+  for(let i=0;i<starCount;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    const size = Math.random()*2 + 1;
+    s.style.width = size+'px';
+    s.style.height = size+'px';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*100+'%';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    s.style.animationDuration = (3+Math.random()*3)+'s';
+    starsContainer.appendChild(s);
+  }
+
+  // scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); }
+    });
+  }, { threshold:0.15 });
+  reveals.forEach(el=>io.observe(el));
+
+  // constellation
+  const notes = [
+    "Aku emang nggak selalu bisa kasih yang paling wah. Tapi aku selalu coba ada, sekecil apapun caranya.",
+    "Aku yang paling inget nanya 'udah makan belum?' walau cuma lewat chat.",
+    "Aku yang dengerin cerita kamu jam 1 malam, walau besoknya harus bangun pagi.",
+    "Aku nggak pernah nyerah belajar jadi lebih baik, buat kamu.",
+    "Aku yang milih kamu, hari ini, dan besok, dan besoknya lagi.",
+    "Aku minta maaf, bukan cuma lewat kata, tapi lewat usaha aku pelan-pelan."
+  ];
+
+  // positions (percent) forming a loose, gentle scatter
+  const positions = [
+    {x:50, y:10},
+    {x:20, y:32},
+    {x:78, y:30},
+    {x:15, y:66},
+    {x:82, y:68},
+    {x:50, y:90}
+  ];
+
+  const wrap = document.getElementById('constellation');
+  const svg = document.getElementById('constLines');
+
+  positions.forEach((pos, i)=>{
+    const btn = document.createElement('button');
+    btn.className='cstar';
+    btn.style.left = pos.x+'%';
+    btn.style.top = pos.y+'%';
+    const note = document.createElement('div');
+    note.className='note';
+    note.textContent = notes[i];
+    btn.appendChild(note);
+    btn.addEventListener('click', ()=>{
+      const wasActive = btn.classList.contains('active');
+      document.querySelectorAll('.cstar').forEach(b=>b.classList.remove('active'));
+      if(!wasActive){ btn.classList.add('active'); }
+    });
+    wrap.appendChild(btn);
+  });
+
+  // draw faint connecting lines between consecutive stars
+  function drawLines(){
+    svg.innerHTML='';
+    const rect = wrap.getBoundingClientRect();
+    for(let i=0;i<positions.length-1;i++){
+      const a = positions[i], b = positions[i+1];
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1', (a.x/100*rect.width));
+      line.setAttribute('y1', (a.y/100*rect.height));
+      line.setAttribute('x2', (b.x/100*rect.width));
+      line.setAttribute('y2', (b.y/100*rect.height));
+      svg.appendChild(line);
+    }
+  }
+  window.addEventListener('load', drawLines);
+  window.addEventListener('resize', drawLines);
+
+  document.addEventListener('click', (e)=>{
+    if(!e.target.closest('.cstar')){
+      document.querySelectorAll('.cstar').forEach(b=>b.classList.remove('active'));
+    }
+  });
+</script>
+
+</body>
+</html>
